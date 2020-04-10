@@ -44,7 +44,7 @@ def cityreader(cities=[]):
             cities.append(City(row[0], float(row[3]), float(row[4])))
 
     return cities
-        
+
 
 cityreader(cities)
 
@@ -90,8 +90,24 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
     within = []
 
+    abs_lat1 = abs(lat1)
+    abs_lat2 = abs(lat2)
+    min_lat = min(abs_lat1, abs_lat2)
+    max_lat = max(abs_lat1, abs_lat2)
+
+    abs_lon1 = abs(lon1)
+    abs_lon2 = abs(lon2)
+    min_lon = min(abs_lon1, abs_lon2)
+    max_lon = max(abs_lon1, abs_lon2)
+
     # TODO Ensure that the lat and lon valuse are all floats
     # Go through each city and check to see if it falls within
     # the specified coordinates.
+
+    for c in cities:
+        abs_lat = abs(c.lat)
+        abs_lon = abs(c.lon)
+        if(abs_lat > min_lat and abs_lat < max_lat and abs_lon > min_lon and abs_lon < max_lon):
+            within.append(c)
 
     return within
